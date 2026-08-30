@@ -6,16 +6,34 @@ const results = document.getElementById('results');
 const count = document.getElementById('count');
 const clear = document.getElementById('clear');
 
+async function api(path, options = {}) {
+  const response = await fetch(path, {
+    ...options,
+    headers: { 'Content-Type': 'application/json', ...(options.headers || {}) }
+  });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(data.error || `Request failed (${response.status})`);
+  return data;
+}
+
 async function loadSites() {
   try {
-    const response = await fetch('sites.json', { cache: 'no-store' });
-    if (!response.ok) throw new Error('Could not load sites');
-    state.sites = await response.json();
+    const data = await api('/api/sites');
+    state.sites = data.sites || [];
     buildCategories();
     render();
   } catch (error) {
-    count.textContent = 'Server error';
-    results.innerHTML = '<div class="empty">Could not load the site registry.</div>';
+    // Static fallback makes the frontend usable before the database is configured.
+    try {
+      const response = await fetch('sites.json', { cache: 'no-store' });
+      if (!response.ok) throw error;
+      state.sites = await response.json();
+      buildCategories();
+      render();
+    } catch (_) {
+      count.textContent = 'Server error';
+      results.innerHTML = '<div class="empty">Could not load the site registry.</div>';
+    }
   }
 }
 
@@ -33,7 +51,7 @@ function buildCategories() {
 function render() {
   const q = state.query.trim().toLowerCase();
   const filtered = state.sites.filter(site => {
-    const text = `${site.name} ${site.description} ${site.category}`.toLowerCase();
+    const text = `${site.name || ''} ${site.description || ''} ${site.category || ''}`.toLowerCase();
     return (!q || text.includes(q)) && (!state.category || site.category === state.category);
   });
 
