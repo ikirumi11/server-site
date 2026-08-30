@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Server Browser</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="brand">SERVER BROWSER</div>
+    <div class="status"><span class="dot"></span> ONLINE</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Find a site</h1>
+      <p>Search the sites registered on this server.</p>
+      <div class="search-box">
+        <input id="search" type="search" placeholder="Search sites..." autocomplete="off">
+        <select id="category" aria-label="Category">
+          <option value="">All categories</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="toolbar">
+      <span id="count">Loading...</span>
+      <button id="clear" type="button">Clear</button>
+    </section>
+
+    <section id="results" class="results" aria-live="polite"></section>
+  </main>
+
+  <footer>Server Browser • Powered by this server</footer>
+  <script src="app.js"></script>
+</body>
+</html>
