@@ -1,38 +1,24 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Server Browser</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Game Hub — 100 Games</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <div class="brand">SERVER BROWSER</div>
-    <div class="status"><span class="dot"></span> ONLINE</div>
-  </header>
-
-  <main>
-    <section class="hero">
-      <h1>Find a site</h1>
-      <p>Search the sites registered on this server.</p>
-      <div class="search-box">
-        <input id="search" type="search" placeholder="Search sites..." autocomplete="off">
-        <select id="category" aria-label="Category">
-          <option value="">All categories</option>
-        </select>
-      </div>
-    </section>
-
-    <section class="toolbar">
-      <span id="count">Loading...</span>
-      <button id="clear" type="button">Clear</button>
-    </section>
-
-    <section id="results" class="results" aria-live="polite"></section>
-  </main>
-
-  <footer>Server Browser • Powered by this server</footer>
-  <script src="app.js"></script>
-</body>
-</html>
+<header><div class="brand">GAME HUB</div><div class="status"><span class="dot"></span> ONLINE</div></header>
+<main>
+<section class="hero">
+<h1>100 games. One place.</h1>
+<p>Pick a game and play directly in your browser.</p>
+<div class="search-box"><input id="search" type="search" placeholder="Search 100 games..." autocomplete="off"><select id="category"><option value="">All categories</option></select></div>
+<div class="quick"><button data-filter="">All</button><button data-filter="Arcade">Arcade</button><button data-filter="Puzzle">Puzzle</button><button data-filter="Board">Board</button><button data-filter="Action">Action</button><button data-filter="Sports">Sports</button></div>
+</section>
+<section class="toolbar"><span id="count">Loading...</span><button id="clear">Clear</button></section>
+<section id="results" class="results"></section>
+</main>
+<div id="gameModal" class="modal" hidden><div class="game-window"><button id="closeGame" class="close">×</button><h2 id="gameTitle"></h2><p id="gameHelp"></p><div id="gameArea"></div></div></div>
+<footer>GAME HUB • 100 browser games</footer>
+<script src="games.js"></script><script src="app.js"></script>
+</body></html>
